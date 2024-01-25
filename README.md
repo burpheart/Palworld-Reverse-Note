@@ -2,7 +2,7 @@
 # 调试窗口
 下面的lua脚本皆为[RE-UE4SS](https://github.com/UE4SS-RE/RE-UE4SS)脚本
 
-
+开启调试窗口
 ```lua
 RegisterKeyBind(Key.F10, function()
     local PalPlayerController = FindFirstOf("PalPlayerController")
@@ -10,7 +10,7 @@ RegisterKeyBind(Key.F10, function()
     PalPlayerController:EnableCheats()
     PalCheatManager:DebugWindow()
   end)
-PalGameSetting
+
 ```
 有一部分命令会触发崩溃
 
@@ -480,6 +480,8 @@ class UDataTable* SoundSourceDataTable;
 }
 ```
 示例
+
+提高闪光帕鲁捕获概率为 100%
 ```lua
 GameSettingInstance = FindFirstOf("PalGameSetting")
 GameSettingInstance.RarePal_AppearanceProbability = 100.0
