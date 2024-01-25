@@ -2,6 +2,7 @@
 # 调试窗口
 下面的lua脚本皆为[RE-UE4SS](https://github.com/UE4SS-RE/RE-UE4SS)脚本
 
+
 ```lua
 RegisterKeyBind(Key.F10, function()
     local PalPlayerController = FindFirstOf("PalPlayerController")
@@ -12,14 +13,17 @@ RegisterKeyBind(Key.F10, function()
 PalGameSetting
 ```
 有一部分命令会触发崩溃
+
 单人离线模式下 也可以使用CRTL+ALT+O开启控制台
 
 控制台在多人模式下 大部分功能不可用
+
 
 一些离线可用的命令
 ![图片.png](https://cdn.nlark.com/yuque/0/2024/png/25577536/1706157223650-fd3fe8d8-14a6-45f7-b35c-168e49d68d06.png#averageHue=%23c8c8c7&clientId=u41804305-9356-4&from=paste&height=1619&id=GQ75f&originHeight=2428&originWidth=2552&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=1397630&status=done&style=none&taskId=u8e87d386-0113-4ff6-9683-6f653fa00eb&title=&width=1701.3333333333333)
 ![图片.png](https://cdn.nlark.com/yuque/0/2024/png/25577536/1706157280059-00b51d0f-4979-4bcf-ac40-d5b3b9a35978.png#averageHue=%231c2728&clientId=u41804305-9356-4&from=paste&height=650&id=Yv8yj&originHeight=975&originWidth=2187&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=995308&status=done&style=none&taskId=u9106c625-00f3-4b99-a04f-664d05b6b66&title=&width=1458)
 # 游戏配置
+
 游戏大部分可调的配置是在PalGameSetting中储存的
 
 ![图片.png](https://cdn.nlark.com/yuque/0/2024/png/25577536/1706157413191-9d11eab5-240d-45f9-95f1-68a8e17dfe8c.png#averageHue=%23559843&clientId=u41804305-9356-4&from=paste&height=676&id=ue11de5d7&originHeight=1014&originWidth=1360&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=317601&status=done&style=none&taskId=u10a214ed-0c47-44fe-b6a1-3a77aefcf47&title=&width=906.6666666666666)
@@ -533,10 +537,14 @@ FMulticastInlineDelegateProperty_ OnRecievedChatMessageDelegate;
 
 
 游戏存档使用了ue5内置的存档管理系统
+
 只不过帕鲁在原存档文件的基础上进行了zlib压缩
-有两种选项 一次压缩  两次压缩)
+
+有两种选项 (一次压缩  两次压缩)
+
 ![图片.png](https://cdn.nlark.com/yuque/0/2024/png/25577536/1706159624474-f6513b81-1c5b-41c0-8f94-fb626dbb63da.png#averageHue=%23fbfbfb&clientId=u41804305-9356-4&from=paste&height=791&id=u471e6f5e&originHeight=1187&originWidth=1597&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=230522&status=done&style=none&taskId=u6844984b-87c3-4837-83a5-aa57460aaa7&title=&width=1064.6666666666667)
 ![图片.png](https://cdn.nlark.com/yuque/0/2024/png/25577536/1706159646521-a7f3c89d-087b-4dda-bce5-02d44b2ce9f3.png#averageHue=%23fbfbfb&clientId=u41804305-9356-4&from=paste&height=805&id=u6e4067e5&originHeight=1208&originWidth=1529&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=187785&status=done&style=none&taskId=u5d28fbc5-d3c9-4ac7-b1eb-0111c84964f&title=&width=1019.3333333333334)
+
 ```cpp
 TTuple<USaveGame *,enum EPalSaveError> *__fastcall UPalSaveGameManager::PalLoadGameFromSlot(
 TTuple<USaveGame *,enum EPalSaveError> *result,
@@ -701,46 +709,73 @@ int UserIndex)
 ```
 
 解压后的存档可以使用[uesave-rs](https://github.com/trumank/uesave-rs)解析并生成JSON文件
+
 # 个人存档?
 ![图片.png](https://cdn.nlark.com/yuque/0/2024/png/25577536/1706160656505-19598b50-2b1e-41aa-81c2-3d4020cc3275.png#averageHue=%23fefefe&clientId=u41804305-9356-4&from=paste&height=807&id=ube19044a&originHeight=1211&originWidth=1015&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=105547&status=done&style=none&taskId=ue782ea3c-6220-4666-a8a1-0fd12d078cc&title=&width=676.6666666666666)
+
 UID.sav内几乎没有储存玩家信息 只储存了对应的uuid
+
 比如玩家ID 帕鲁盒ID 储存箱ID 等等 实际上这些数据都还是储存在Level.sav里面
+
 现在 我们已经拿到了玩家ID
+
 想要修改玩家数据还得是去看看Level.sav
 
 # Level.sav
 试了个多人游戏服务器的备份 
+
+
 解压后体积巨大 差不多有140M
 ![图片.png](https://cdn.nlark.com/yuque/0/2024/png/25577536/1706160572090-ee5f45c0-acb5-4be7-8332-ae04d407ea88.png#averageHue=%23f6f5f4&clientId=u41804305-9356-4&from=paste&height=607&id=Ddh7Q&originHeight=910&originWidth=1338&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=89749&status=done&style=none&taskId=u94a2a476-98e0-4acc-b359-65cc3f5365b&title=&width=892)
+
 最终生成了2GB的JSON文件 编辑它十分的困难
 
 写了个工具遍历打印结构
+
 ![图片.png](https://cdn.nlark.com/yuque/0/2024/png/25577536/1706161001185-a089bcc7-ce24-4d6f-9eaa-3bbd00df60e0.png#averageHue=%23f0ece8&clientId=u41804305-9356-4&from=paste&height=585&id=gMx6U&originHeight=878&originWidth=1441&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=227775&status=done&style=none&taskId=uc17c78f5-de4e-44da-bd6e-b4be9edc1ea&title=&width=960.6666666666666)
+
 玩家对象储存在
+
 root.properties.worldSaveData.Struct.value.Struct.CharacterSaveParameterMap.Map.value[X]
+
 这个数组内
+
 这个结构也包含了NPC角色 (NPC UID为全0)
+
 在此结构中 key.Struct.Struct.PlayerUId.Struct.value.Guid 为玩家id
+
 value.Struct.Struct.RawData.Array.value.Base.Byte.Byte 为玩家数据
+
 玩家数据是二进制序列化数据 储存在RawData中 
+
 这个数据是和虚幻存档是一样的 只不过它没有存档头
+
 ![图片.png](https://cdn.nlark.com/yuque/0/2024/png/25577536/1706161745347-945b2449-632c-451c-b2ec-ab125fb5da2e.png#averageHue=%2334322c&clientId=u41804305-9356-4&from=paste&height=511&id=tledI&originHeight=766&originWidth=1181&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=148677&status=done&style=none&taskId=u71adda88-b55d-44c0-b7a8-70230c75f89&title=&width=787.3333333333334)
+
 稍微魔改了下uesave-rs
+
 [https://github.com/burpheart/uesave-rs/tree/palworld](https://github.com/burpheart/uesave-rs/tree/palworld)
+
 成功解析了玩家数据
+
 ![图片.png](https://cdn.nlark.com/yuque/0/2024/png/25577536/1706161828325-c21f9249-1fe7-4831-866c-8fa315c01c14.png#averageHue=%23fcfbfa&clientId=u41804305-9356-4&from=paste&height=815&id=u6e8e8b1b&originHeight=1222&originWidth=931&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=74422&status=done&style=none&taskId=u0dcc94bb-a406-446c-bb99-35a1fa06fed&title=&width=620.6666666666666)
 
 
 ![图片.png](https://cdn.nlark.com/yuque/0/2024/png/25577536/1706164986717-c0c45149-0857-4780-92e9-238cd67333b2.png#averageHue=%23998167&clientId=u7aabedb4-4aae-4&from=paste&height=316&id=ud1b03fc6&originHeight=474&originWidth=2060&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=61880&status=done&style=none&taskId=ud8ae4877-0235-4eca-9923-0f51b961df5&title=&width=1373.3333333333333)
+
 之后就可以愉快的修改玩家数据了
+
 整个修改过程
+
 修改玩家数据->序列化玩家数据->替换回原位->序列化世界数据->压缩后替换原存档 ( 替换存档要提前关闭服务器 记得完整备份存档  有可能修改失败 或者是其他未知影响)
 
 
 ![图片.png](https://cdn.nlark.com/yuque/0/2024/png/25577536/1706162217578-31dfedb7-7868-49b6-a570-139763b21d5d.png#averageHue=%231d2a2b&clientId=u41804305-9356-4&from=paste&height=1067&id=u352995e4&originHeight=1600&originWidth=2560&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=4477381&status=done&style=none&taskId=u0d9eb851-aabc-4cdf-b146-d7176ff2d13&title=&width=1706.6666666666667)
 ![图片.png](https://cdn.nlark.com/yuque/0/2024/png/25577536/1706162425941-a05ed2cd-ecc7-466d-8863-c0a4c906aabe.png#averageHue=%2316222c&clientId=u41804305-9356-4&from=paste&height=637&id=ub9f4828f&originHeight=955&originWidth=1477&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=1846280&status=done&style=none&taskId=u31f0dfe1-42cf-4785-b39c-3f87c3ea614&title=&width=984.6666666666666)![图片.png](https://cdn.nlark.com/yuque/0/2024/png/25577536/1706162666223-db5ae191-d856-4912-bcb4-d1d4a6cbcb1e.png#averageHue=%234a3429&clientId=u41804305-9356-4&from=paste&height=1067&id=u12ec2088&originHeight=1600&originWidth=2560&originalType=binary&ratio=1.5&rotation=0&showTitle=false&size=5704653&status=done&style=none&taskId=ucaa65aa4-027e-41c8-b74a-92f6dfb36f7&title=&width=1706.6666666666667)
 # 坏档修复
+
 既然可以自由的编辑玩家存档 那么坏档也有一定可能修复
+
 TODO //还没有遇到坏档 手里没有样本
 
 # 附录
